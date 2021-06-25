@@ -6,9 +6,9 @@
                 "${workspaceFolder}/**"
             ],
             "defines": [
-                "STM32MCU",
+                "USE_FULL_LL_DRIVER",
                 "USE_HAL_DRIVER",
-                "USE_FULL_LL_DRIVER"
+                "STM32MCU"
             ],
             "cStandard": "gnu11",
             "cppStandard": "gnu++11",
