@@ -1,4 +1,14 @@
-C_SOURCES += \
-$(wildcard *.c)
-C_INCLUDES += \
--I.
+CFLAGS += -Wextra
+CFLAGS += -Wpedantic
+CFLAGS += -Wunused
+CFLAGS += -Wundef
+CFLAGS += -Winline
+CFLAGS += -Wshadow
+CFLAGS += -Wconversion
+CFLAGS += -Wfloat-equal
+CFLAGS += -Wswitch-enum
+CFLAGS += -Wswitch-default
+CFLAGS += -Wdouble-promotion
+C_INCLUDES += -I .
+C_SOURCES += $(wildcard *.c)
+LDFLAGS += -u _printf_float
