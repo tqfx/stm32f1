@@ -4,7 +4,7 @@
 
 - [Visual Studio Code](https://code.visualstudio.com/Download)
 
-- [Java](https://www.oracle.com/java/technologies/javase-downloads.html)
+- [Java jre](https://www.oracle.com/java/technologies/javase-downloads.html)
 
 - [STM32CubeMX](https://www.st.com/zh/development-tools/stm32cubemx.html)
 
@@ -32,41 +32,41 @@
 
 - `File` -> `New Project`
 
-![ ](./img/STM32CubeMX_start_1.png)
+![ ](images/STM32CubeMX-start1.png)
 
 - 选择匹配的芯片，点击`Start Project`
 
-![ ](./img/STM32CubeMX_start_2.png)
+![ ](images/STM32CubeMX-start2.png)
 
 - `Project Manager` -> `Project`，<br>设置`Project Name`和`Project Location`，<br>将`Application Structure`修改为`Basic`，<br>将`Toolchain/IDE`修改为`Makefile`，<br>勾选`Use latest available version`
 
-![ ](./img/STM32CubeMX_start_3.png)
+![ ](images/STM32CubeMX-start3.png)
 
 - `Project Manager` -> `Code Generator`，<br>`STM32Cube MCU packages and embedded software packs`选择`Copy only the necessary library files`，<br>`Generated files`勾选`Generate peripheral initialization as a pair of '.c/.h' files per peripheral`
 
-![ ](./img/STM32CubeMX_start_4.png)
+![ ](images/STM32CubeMX-start4.png)
 
 - `Project Manager` -> `Advanced Settings`，将`HAL`改为`LL`
 
-![ ](./img/STM32CubeMX_start_5.png)
+![ ](images/STM32CubeMX-start5.png)
 
 - 点击`GENETATE CODE` -> `Open Folder`
 
-![ ](./img/STM32CubeMX_start_6.png)![ ](./img/STM32CubeMX_start_7.png)
+![ ](images/STM32CubeMX-start6.png)![ ](images/STM32CubeMX-start7.png)
 
 ### Visual Studio Code
 
 - 右键通过`Code`打开
 
-![ ](./img/STM32VScode_start_1.png)
+![ ](images/STM32VScode-start1.png)
 
 - 安装插件`Chinese (Simplified) Language`，`C/C++`，`C++ Intellisense`和`Cortex-Debug`
 
-![ ](./img/STM32VScode_start_2.png)
+![ ](images/STM32VScode-start2.png)
 
 - 按`F1`键或者`ctrl+shift+P`，输入`编辑配置JSON`，然后选择下图选项
 
-![ ](./img/STM32VScode_start_3.png)
+![ ](images/STM32VScode-start3.png)
 
 用以下内容替换原内容
 
@@ -79,8 +79,8 @@
                 "${workspaceFolder}/**"
             ],
             "defines": [
-                "STM32F103xB",
-                "USE_FULL_LL_DRIVER"
+                "USE_FULL_LL_DRIVER",
+                "STM32F103xB"
             ],
             "cStandard": "gnu11",
             "cppStandard": "gnu++11",
@@ -99,7 +99,6 @@
 | `cStandard` | C标准 |
 | `cppStandard` | C++标准 |
 | `compilerPath` | 编译器路径 |
-| `compilerArgs` | 编译器参数 |
 | `intelliSenseMode` | 智能感知模式 |
 
 - 新建文件`openocd.cfg`，写入以下内容
@@ -115,7 +114,7 @@ source [find target/stm32f1x.cfg]
 | `target` | 目标板 |
 
 - `运行` -> `添加配置` -> `Cortex Debug`或者按下图操作
-    ![ ](./img/STM32VScode_start_4.png)
+    ![ ](images/STM32VScode-start4.png)
 
 ```json
 {
@@ -149,7 +148,7 @@ source [find target/stm32f1x.cfg]
 - 打开`Makefile`文件，追加以下内容
 
 ```bash
-update:
+flash:
 	openocd -f ../openocd.cfg -c init -c halt -c "program $(BUILD_DIR)/$(TARGET).hex verify reset exit"
 reset:
 	openocd -f ../openocd.cfg -c init -c halt -c reset -c shutdown
@@ -164,7 +163,7 @@ reset:
         {
             "type": "shell",
             "label": "Build",
-            "command": "make",
+            "command": "make -j",
             "problemMatcher": [
                 "$gcc"
             ],
@@ -172,8 +171,8 @@ reset:
         },
         {
             "type": "shell",
-            "label": "Update",
-            "command": "make;make update",
+            "label": "Flash",
+            "command": "make -j;make flash",
             "problemMatcher": [
                 "$gcc"
             ],
@@ -192,12 +191,12 @@ reset:
 }
 ```
 
-`终端` -> `运行任务`，会出现三个任务 `Build`、`Update` 和 `Reset`
+`终端` -> `运行任务`，会出现三个任务 `Build`、`Flash` 和 `Reset`
 
 | 任务 | 解释 |
 | :----: | :----: |
 | `Build` | 构建工程 |
-| `Update` | 下载程序 |
+| `Flash` | 下载程序 |
 | `Reset` | 复位单片机 |
 
 - `` ctrl+` ``切换终端，输入以下命令
@@ -205,7 +204,7 @@ reset:
 | 命令 | 解释 |
 | :----: | :----: |
 | `make` | 编译工程代码 |
-| `make update` | 将代码烧录进单片机 |
+| `make flash` | 将代码烧录进单片机 |
 | `make reset` | 将单片机复位 |
 
-- `Python`[脚本](https://github.com/tqfx/stm32f1/blob/master/stm32init.py)
+- `Python` [脚本](https://github.com/tqfx/stm32f1/blob/master/stm32init.py)
