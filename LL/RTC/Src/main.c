@@ -97,7 +97,7 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  //MX_RTC_Init();
+  MX_RTC_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
   Configure_RTC();
@@ -135,6 +135,11 @@ void SystemClock_Config(void)
 
   }
   LL_PWR_EnableBkUpAccess();
+  if(LL_RCC_GetRTCClockSource() != LL_RCC_RTC_CLKSOURCE_LSE)
+  {
+    LL_RCC_ForceBackupDomainReset();
+    LL_RCC_ReleaseBackupDomainReset();
+  }
   LL_RCC_LSE_Enable();
 
    /* Wait till LSE is ready */
@@ -144,8 +149,6 @@ void SystemClock_Config(void)
   }
   if(LL_RCC_GetRTCClockSource() != LL_RCC_RTC_CLKSOURCE_LSE)
   {
-    LL_RCC_ForceBackupDomainReset();
-    LL_RCC_ReleaseBackupDomainReset();
     LL_RCC_SetRTCClockSource(LL_RCC_RTC_CLKSOURCE_LSE);
   }
   LL_RCC_EnableRTC();

@@ -143,8 +143,8 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  //  MX_DMA_Init();
-  //  MX_USART1_UART_Init();
+  MX_DMA_Init();
+  MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
   Configure_DMA();
   Configure_USART();
@@ -157,6 +157,7 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
+
     /* USER CODE BEGIN 3 */
     LL_mDelay(1000);
     LL_GPIO_TogglePin(GPIOC, LL_GPIO_PIN_13);
@@ -171,24 +172,26 @@ int main(void)
 void SystemClock_Config(void)
 {
   LL_FLASH_SetLatency(LL_FLASH_LATENCY_0);
-  while (LL_FLASH_GetLatency() != LL_FLASH_LATENCY_0)
+  while(LL_FLASH_GetLatency()!= LL_FLASH_LATENCY_0)
   {
   }
   LL_RCC_HSI_SetCalibTrimming(16);
   LL_RCC_HSI_Enable();
 
-  /* Wait till HSI is ready */
-  while (LL_RCC_HSI_IsReady() != 1)
+   /* Wait till HSI is ready */
+  while(LL_RCC_HSI_IsReady() != 1)
   {
+
   }
   LL_RCC_SetAHBPrescaler(LL_RCC_SYSCLK_DIV_1);
   LL_RCC_SetAPB1Prescaler(LL_RCC_APB1_DIV_1);
   LL_RCC_SetAPB2Prescaler(LL_RCC_APB2_DIV_1);
   LL_RCC_SetSysClkSource(LL_RCC_SYS_CLKSOURCE_HSI);
 
-  /* Wait till System clock is ready */
-  while (LL_RCC_GetSysClkSource() != LL_RCC_SYS_CLKSOURCE_STATUS_HSI)
+   /* Wait till System clock is ready */
+  while(LL_RCC_GetSysClkSource() != LL_RCC_SYS_CLKSOURCE_STATUS_HSI)
   {
+
   }
   LL_Init1msTick(8000000);
   LL_SetSystemCoreClock(8000000);
@@ -210,7 +213,7 @@ void Error_Handler(void)
   /* USER CODE END Error_Handler_Debug */
 }
 
-#ifdef USE_FULL_ASSERT
+#ifdef  USE_FULL_ASSERT
 /**
   * @brief  Reports the name of the source file and the source line number
   *         where the assert_param error has occurred.

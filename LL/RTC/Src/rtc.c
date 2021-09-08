@@ -6,7 +6,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2020 STMicroelectronics.
+  * <h2><center>&copy; Copyright (c) 2021 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
   * This software component is licensed by ST under BSD 3-Clause license,
@@ -34,30 +34,42 @@ uint8_t timeUpdate = 0;
 /* RTC init function */
 void MX_RTC_Init(void)
 {
+
+  /* USER CODE BEGIN RTC_Init 0 */
+
+  /* USER CODE END RTC_Init 0 */
+
   LL_RTC_InitTypeDef RTC_InitStruct = {0};
   LL_RTC_TimeTypeDef RTC_TimeStruct = {0};
 
-  LL_PWR_EnableBkUpAccess();
-  /* Enable BKP CLK enable for backup registers */
-  LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_BKP);
+    LL_PWR_EnableBkUpAccess();
+    /* Enable BKP CLK enable for backup registers */
+    LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_BKP);
   /* Peripheral clock enable */
   LL_RCC_EnableRTC();
 
   /* RTC interrupt Init */
-  NVIC_SetPriority(RTC_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(), 0, 0));
+  NVIC_SetPriority(RTC_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(),0, 0));
   NVIC_EnableIRQ(RTC_IRQn);
 
+  /* USER CODE BEGIN RTC_Init 1 */
+
+  /* USER CODE END RTC_Init 1 */
   /** Initialize RTC and set the Time and Date
   */
-  RTC_InitStruct.AsynchPrescaler = 0x7FFFU;
+  RTC_InitStruct.AsynchPrescaler = 1048575;
   LL_RTC_Init(RTC, &RTC_InitStruct);
-  LL_RTC_SetAsynchPrescaler(RTC, 0x7FFFU);
+  LL_RTC_SetAsynchPrescaler(RTC, 1048575);
   /** Initialize RTC and set the Time and Date
   */
   RTC_TimeStruct.Hours = 23;
   RTC_TimeStruct.Minutes = 59;
   RTC_TimeStruct.Seconds = 59;
   LL_RTC_TIME_Init(RTC, LL_RTC_FORMAT_BIN, &RTC_TimeStruct);
+  /* USER CODE BEGIN RTC_Init 2 */
+
+  /* USER CODE END RTC_Init 2 */
+
 }
 
 /* USER CODE BEGIN 1 */

@@ -1,7 +1,7 @@
 CFLAGS += -Wextra
 CFLAGS += -Wpedantic
-CFLAGS += -Wunused
 CFLAGS += -Wundef
+CFLAGS += -Wunused
 CFLAGS += -Winline
 CFLAGS += -Wshadow
 CFLAGS += -Wconversion

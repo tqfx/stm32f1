@@ -1,4 +1,17 @@
+CFLAGS += -Wextra
+CFLAGS += -Wpedantic
+CFLAGS += -Wundef
+CFLAGS += -Wunused
+CFLAGS += -Winline
+CFLAGS += -Wshadow
+CFLAGS += -Wconversion
+CFLAGS += -Wfloat-equal
+CFLAGS += -Wswitch-enum
+CFLAGS += -Wswitch-default
+CFLAGS += -Wdouble-promotion
+C_INCLUDES += -I .
+C_SOURCES += $(wildcard *.c)
 C_SOURCES += \
-$(wildcard *.c)
-C_INCLUDES += \
--I .
+Src/delay.c \
+Src/RC522.c
+LDFLAGS += -u _printf_float
