@@ -34,41 +34,41 @@
 
 - `File` -> `New Project`
 
-![ ](images/STM32CubeMX-start1.png)
+![ ](images/STM32CubeMX1.png)
 
 - 选择匹配的芯片，点击`Start Project`
 
-![ ](images/STM32CubeMX-start2.png)
+![ ](images/STM32CubeMX2.png)
 
 - `Project Manager` -> `Project`，<br>设置`Project Name`和`Project Location`，<br>将`Application Structure`修改为`Basic`，<br>将`Toolchain/IDE`修改为`Makefile`，<br>勾选`Use latest available version`
 
-![ ](images/STM32CubeMX-start3.png)
+![ ](images/STM32CubeMX3.png)
 
 - `Project Manager` -> `Code Generator`，<br>`STM32Cube MCU packages and embedded software packs`选择`Copy only the necessary library files`，<br>`Generated files`勾选`Generate peripheral initialization as a pair of '.c/.h' files per peripheral`
 
-![ ](images/STM32CubeMX-start4.png)
+![ ](images/STM32CubeMX4.png)
 
 - `Project Manager` -> `Advanced Settings`，将`HAL`改为`LL`
 
-![ ](images/STM32CubeMX-start5.png)
+![ ](images/STM32CubeMX5.png)
 
 - 点击`GENETATE CODE` -> `Open Folder`
 
-![ ](images/STM32CubeMX-start6.png)![ ](images/STM32CubeMX-start7.png)
+![ ](images/STM32CubeMX6.png)![ ](images/STM32CubeMX7.png)
 
 ### Visual Studio Code
 
 - 右键通过`Code`打开
 
-![ ](images/STM32VScode-start1.png)
+![ ](images/STM32VSCode1.png)
 
 - 安装插件`Chinese (Simplified) Language`，`C/C++`，`C++ Intellisense`和`Cortex-Debug`
 
-![ ](images/STM32VScode-start2.png)
+![ ](images/STM32VSCode2.png)
 
 - 按`F1`键或者`ctrl+shift+P`，输入`编辑配置JSON`，然后选择下图选项
 
-![ ](images/STM32VScode-start3.png)
+![ ](images/STM32VSCode3.png)
 
 用以下内容替换原内容
 
@@ -116,7 +116,7 @@ source [find target/stm32f1x.cfg]
 | `target` | 目标板 |
 
 - `运行` -> `添加配置` -> `Cortex Debug`或者按下图操作
-    ![ ](images/STM32VScode-start4.png)
+    ![ ](images/STM32VSCode4.png)
 
 ```json
 {
