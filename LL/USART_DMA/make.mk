@@ -1,3 +1,4 @@
+# compile gcc flags
 CFLAGS += -Wextra
 CFLAGS += -Wpedantic
 CFLAGS += -Wundef
@@ -9,6 +10,15 @@ CFLAGS += -Wfloat-equal
 CFLAGS += -Wswitch-enum
 CFLAGS += -Wswitch-default
 CFLAGS += -Wdouble-promotion
-C_INCLUDES += -I .
+# C defines
+C_DEFS +=
+# C includes
+C_INCLUDES +=
+# C sources
 C_SOURCES += $(wildcard *.c)
-LDFLAGS += -u _printf_float
+# AS defines
+AS_DEFS +=
+# ASM sources
+ASM_SOURCES +=
+# link flags
+LDFLAGS += -u_printf_float
